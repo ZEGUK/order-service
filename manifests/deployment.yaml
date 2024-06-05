@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  labels:
+    app: order-service
+    kubernetes.azure.com/generator: devhub
+  namespace: petstore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+        - name: order-service
+          image: petstoredemo.azurecr.io/image-workflow-1717573258140:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
